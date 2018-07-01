@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>St. Kilda Pier</title>
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <script src="https://unpkg.com/vue"></script>
+  <script src="https://unpkg.com/vuex"></script>
+  <script src="https://unpkg.com/vuejs-storage"></script>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+</head>
+<body>
+    <div id="Index">
+        <div class="w3-container w3-teal">
+            <h1>St. Kilda Pier - MNIST</h1>
+        </div>
+
+        <div class="w3-panel">
+            <p>MNIST Predict Test Page</p>
+            <p>
+                ID: <input type="text" class="text" title="ID" v-model="id"/>
+                PW: <input type="password" class="text" title="PW" v-model="pw" v-on:keyup.enter="signIn()"/>
+                <button class="w3-btn w3-round w3-teal" v-on:click="signIn">SignIn</button>
+            </p>
+            <label>Access Token</label>
+            <textarea style="width:100%;">{{ accessToken }}</textarea> 
+        </div>
+        
+        
+        <div class="w3-panel">
+            <p>Files: <input type="file" class="w3-input w3-round w3-teal" id="files" ref="uploadFiles" accept="image/*" multiple v-on:change="setUploadFiles()"/>
+            </p>
+            <div v-for="(file, key) in files">
+                {{ file.name }} <img class="preview" v-bind:ref="'image'+parseInt( key )"/>
+            </div>
+            <p><button class="w3-btn w3-round w3-teal" v-on:click="submitFiles()">Submit</button></p>
+        </div>
+
+        <div class="w3-panel">
+            <div v-if="status">
+                <p>DNN - Class: {{ dnnPredClass }}, Probability: {{ dnnPredProb }}</p>
+                <p>CNN - Class: {{ cnnPredClass }}, Probability: {{ cnnPredProb }}</p>
+            </div>
+        </div>
+        
+    </div>
+    <script src="js/index.js"></script>
+</body>
+</html>
